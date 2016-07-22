@@ -1,0 +1,38 @@
+body {
+  background: url(img/background.jpeg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+.hero {
+  position: absolute;
+  background-image: url(img/Alba.png);
+  background-position: -100px -160px;
+  width: 380px;
+  height: 573px;
+  bottom: 1%;
+  left: 35%;
+}
+
+.attack {
+  background-position: -557px -160px;
+  width: 488px;
+  height: 573px;
+}
+
+.hero.defeat {
+  background-position: center;
+/*   background-image: ////;
+ */}
+
+.box {
+  position: absolute;
+  height: 400px;
+  width: 50px;
+  border: 1px solid black;
+  background: black;
+  bottom: 1%;
+  left: 90%;
+}
+
+
+
