@@ -6,8 +6,8 @@
 var hero = $('<div class="hero">');
   $('body').append(hero);
 
-var mud = $('<div class="mud">')
-  $('body').append(mud);
+// var mud = $('<div class="mud">')
+//   $('body').append(mud);
 
 
 //instructions at beginning of game
@@ -46,6 +46,7 @@ function moveHero() {
         if (!keys.hasOwnProperty(direction)) continue;
         if (direction == 37 && hero.position().left > -150) {
             hero.addClass('left');
+
             hero.animate({left: "-=10"}, 0);
         }
         if (direction == 38 && hero.position().top > $(window).height()) {
@@ -87,55 +88,61 @@ function attack(){
 //collision detection / enemy dies if hero attacks
 function collision() {
     // determining positions of hero and mud
+  var currentMud = $('.mud')
+  if (currentMud.length){
   var heroPos = hero.offset().left + 469; //checks for width + width of hero class
-  var mudPos = mud.offset().left;
+  var mudPos = currentMud.offset().left;
 
   if (mudPos - heroPos < 0 && $('div').hasClass('attack') ){
     console.log('hit');
-    mud.addClass('mudDeath');
+    currentMud.addClass('mudDeath');
 
     setTimeout(function(){ //removes mud after death
-      mud.remove();
+      currentMud.remove();
     }, 100);
 
-    mud = $('.mud'); // this keeps checking for all mudes
+    currentMud = $('.mud'); // this keeps checking for all mudes
   }
+}
 }
 
 //collision detection / hero dies if enemy touches them
 function death(){
+  var currentMud = $('.mud')
+  if (currentMud.length){
   var heroPos = hero.offset().left + 219; //checks for width + width of hero class
-  var mudPos = mud.offset().left;
+  var mudPos = currentMud.offset().left;
 
   if (mudPos - heroPos < 0 && mudPos ){
   hero.remove();
   console.log("GAME OVER");
 }
 }
+}
 
-//creating enemy
-// function makeMud(){
-//   var mud = $('<div class="mud">')
-//   $('body').append(mud);
-// };
+// creating enemy
+function makeMud(){
+  var mud = $('<div class="mud">')
+  $('body').append(mud);
+};
 
-// //needed to change the interval of setinterval thats running, got this code from:
-// // http://stackoverflow.com/questions/1280263/changing-the-interval-of-setinterval-while-its-running
-// var counter = 5000;
+//needed to change the interval of setinterval thats running, got this code from:
+// http://stackoverflow.com/questions/1280263/changing-the-interval-of-setinterval-while-its-running
+var counter = 5000;
 
-// var moveMud = function(){
+var moveMud = function(){
+  makeMud()
+  $('.mud').animate({left: "-150"}, 4000); //1000 is how fast is move across the screen
 
-//   $('.mud').animate({left: "-150"}, 4000); //1000 is how fast is move across the screen
-//   makeMud()
 
-//   if (counter>100){
-//     counter=counter-10; // how fast enemies appear
-//   }
+  if (counter>100){
+    counter=counter-10; // how fast enemies appear
+  }
 
-//   clearInterval(interval);
-//   interval = setInterval(moveMud, counter);
-// }
-// var interval = setInterval(moveMud, counter);
+  clearInterval(interval);
+  interval = setInterval(moveMud, counter);
+}
+var interval = setInterval(moveMud, counter);
 
 
 

@@ -25,6 +25,7 @@ body {
 }
 
 .attack {
+  background-image: url(img/ItzelSprite.png);
   background-position: -1283px -477px;
   width: 469px;
   height: 460px;
@@ -45,9 +46,9 @@ body {
 .run {
   position: absolute;
   background-image: url(img/ItzelRun.png);
-  background-position: -1005px -535px;
-  width: 219px;
-  height: 410px;
+  background-position: -1079px -609px;
+  width: 329px;
+  height: 313px;
   bottom: 0%;
 }
 
