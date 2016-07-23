@@ -3,35 +3,81 @@ body {
   background-size: cover;
 }
 
+.instructions {
+  font-family: Phosphate;
+  font-size: 45px;
+  text-align: center;
+  margin-top: 60px;
+  line-height: 100px;
+  color: #900C3F;
+  padding-right: 2px;
+}
+/* Inconsolata, Futura : alternate font
+ */
 .hero {
   position: absolute;
-  background-image: url(img/Alba.png);
-  background-position: -100px -160px;
-  width: 380px;
-  height: 573px;
-  bottom: 1%;
+  background-image: url(img/ItzelSprite.png);
+  background-position: -1005px -535px;
+  width: 219px;
+  height: 410px;
+  bottom: 0%;
   left: 35%;
 }
 
 .attack {
-  background-position: -557px -160px;
-  width: 488px;
-  height: 573px;
+  background-position: -1283px -477px;
+  width: 469px;
+  height: 460px;
 }
 
-.hero.defeat {
+.left {
+  background-position: -258px -531px;
+  width: 226px;
+  height: 410px;
+}
+
+.attackleft {
+  background-position: -536px -570px;
+  width: 360px;
+  height: 365px;
+}
+
+.run {
+  position: absolute;
+  background-image: url(img/ItzelRun.png);
+  background-position: -1005px -535px;
+  width: 219px;
+  height: 410px;
+  bottom: 0%;
+}
+
+.runLeft {
+  background-position: -536px -570px;
+  width: 360px;
+  height: 365px;
+}
+
+.defeat {
   background-position: center;
 /*   background-image: ////;
  */}
 
-.box {
+
+
+.mud {
   position: absolute;
-  height: 400px;
-  width: 50px;
-  border: 1px solid black;
-  background: black;
-  bottom: 1%;
-  left: 90%;
+  background-image: url(img/Mudman.png);
+  background-position: -1036px -608px;
+  width: 304px;
+  height: 344px;
+  bottom: 0%;
+  left: 100%;
+}
+
+.mudDeath {
+  background-position: -1477px -532px;
+  width: 305px;
+  height: 423px;
 }
 
 
