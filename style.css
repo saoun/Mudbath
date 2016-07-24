@@ -32,12 +32,14 @@ body {
 }
 
 .left {
+  background-image: url(img/ItzelSprite.png);
   background-position: -258px -531px;
   width: 226px;
   height: 410px;
 }
 
 .attackleft {
+  background-image: url(img/ItzelSprite.png);
   background-position: -536px -570px;
   width: 360px;
   height: 365px;
@@ -49,7 +51,6 @@ body {
   background-position: -1079px -609px;
   width: 329px;
   height: 313px;
-  bottom: 0%;
 }
 
 .runLeft {
@@ -59,7 +60,11 @@ body {
 }
 
 .defeat {
-  background-position: center;
+  position: absolute;
+  background-image: url(img/ItzelDeath.png);
+  background-position: -821px -565px;
+  width: 308px;
+  height: 378px;
 /*   background-image: ////;
  */}
 
@@ -76,6 +81,7 @@ body {
 }
 
 .mudDeath {
+  background-image: url(img/Mudman.png);
   background-position: -1477px -532px;
   width: 305px;
   height: 423px;

@@ -105,8 +105,12 @@ function collision() {
       currentMud = $('.mud'); // this keeps checking for all mudes
     }
     else if (mudPos - (heroPos + 219) < 0 && mudPos ) { //adds width of that particular image
-      hero.remove();
       console.log("GAME OVER");
+      hero.addClass('defeat');
+
+      setTimeout(function(){
+        hero.remove();
+      }, 3000)
     }
   }
 }
