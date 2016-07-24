@@ -4,10 +4,7 @@
 
 //global variables
 var hero = $('<div class="hero">');
-  $('body').append(hero);
-
-// var mud = $('<div class="mud">')
-//   $('body').append(mud);
+$('body').append(hero);
 
 
 //instructions at beginning of game
@@ -24,14 +21,11 @@ setTimeout(function(){
 setInterval(moveHero, 20);
 setInterval(attack, 100);
 setInterval(collision, 20);
-// setInterval(death, 100);
 var keys = {}
 
 
 //moving hero
 //setting limits for up / down / left / right to be contained in background
-// maybe just delete up and down keys? to remove functionality
-// or figure out a jump option (to revisit)
 // http://stackoverflow.com/questions/7298507/move-element-with-keypress-multiple
 $(document).keydown(function(e) {
     keys[e.keyCode] = true;
@@ -42,25 +36,30 @@ $(document).keyup(function(e) {
 });
 
 function moveHero() {
+
     for (var direction in keys) {
         if (!keys.hasOwnProperty(direction)) continue;
+        //move left
         if (direction == 37 && hero.position().left > -150) {
             hero.addClass('left');
-
+            hero.addClass('runLeft');
             hero.animate({left: "-=10"}, 0);
         }
-        if (direction == 38 && hero.position().top > $(window).height()) {
-            hero.animate({top: "-=10"}, 0);
-        }
+
+        //move right
         if (direction == 39 && hero.position().left < $(window).width()) {
             hero.removeClass('left');
+            hero.removeClass('runLeft')
+            hero.addClass('run')
             hero.animate({left: "+=10"}, 0);
         }
-        if (direction == 40 && hero.position().top > $(window).height()) {
-            hero.animate({top: "+=10"}, 0);
+        //jumping
+        if (direction == 38 && hero.position().top > $(window).height()) {
+            hero.animate({top: "+10", bottom: "+10"}, 0);
         }
     }
 }
+
 
 //toggling class for attack, attack on space bar
 function attack(){
@@ -68,6 +67,10 @@ function attack(){
     if (!keys.hasOwnProperty(direction)) continue;
 
     if (direction == 32) {
+      //disable run
+      hero.removeClass('run')
+      hero.removeClass('runLeft')
+
       if (hero.hasClass('left')){
         hero.toggleClass('attackleft')
       } else {
@@ -85,16 +88,19 @@ function attack(){
   }
 }
 
+
 //collision detection / enemy dies if hero attacks
 function collision() {
     // determining positions of hero and mud
   var currentMud = $('.mud')
+  // for (var i = 0; i< currentMud.length; i++){ // alternative way of writing
   if (currentMud.length){
 
     var heroPos = hero.offset().left; //checks for width + width of hero class
     var mudPos = currentMud.offset().left;
 
     if (mudPos - (heroPos + 469) < 0 && $('div').hasClass('attack') ){ //adds width of that particular image
+
       console.log('hit');
       currentMud.addClass('mudDeath');
 
@@ -105,23 +111,18 @@ function collision() {
       currentMud = $('.mud'); // this keeps checking for all mudes
     }
     else if (mudPos - (heroPos + 219) < 0 && mudPos ) { //adds width of that particular image
+
       console.log("GAME OVER");
       hero.addClass('defeat');
+      // currentMud.stop(); //to stop animation
 
       setTimeout(function(){
         hero.remove();
-      }, 3000)
+      }, 3000);
+
     }
   }
 }
-
-
-
-
-
-
-
-
 
 
 // creating enemy
@@ -152,53 +153,6 @@ var interval = setInterval(moveMud, counter);
 
 
 
-
-
-/////////////////////
-
-// setInterval(moveBox, 20);
-
-// //moving the enemy across the screen DRAFT1
-// function moveBox(){
-
-//   setTimeout(function(){ //setting timeout to delay appearance of enemy
-//     box.animate({left: "-=5"}, 10);
-//   }, 1000);
-
-//   //remove box after it leaves screen
-//   if (box.position().left < 0){
-//     this.remove();
-//   }
-// }
-
-/////////////////////
-
-//DRAFT2: boxes appear and move across screen. decent option, no frequency increase though
-// function makeBox(){
-//   var box = $('<div class="box">')
-//   $('body').append(box);
-// };
-// function moveBox(){
-//   var box = $('.box');
-//   setInterval(function(){
-//   // var box = $('.box')
-//    box.animate({left: "-=5"}, 10);
-//   }, 1000)
-
-//   // remove box after it leaves screen
-//   if (box.position().left < 0){
-//     $(this).remove();
-//   }
-// }
-/////////////////////
-
-// create multiple enemies ???
-// for(var i=0; i<5; i++) {
-//     var box = $('<div class="box">')
-//     $('body').append(box);
-//     box.animate({left: "-=5"}, 20);
-
-//   }
 
 
 

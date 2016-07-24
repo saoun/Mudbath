@@ -14,6 +14,17 @@ body {
 }
 /* Inconsolata, Futura : alternate font
  */
+
+ .gameOver {
+  font-family: Phosphate;
+  font-size: 45px;
+  text-align: center;
+  margin-top: 90px;
+  line-height: 100px;
+  color: #900C3F;
+  padding-right: 2px;
+}
+
 .hero {
   position: absolute;
   background-image: url(img/ItzelSprite.png);
@@ -54,9 +65,10 @@ body {
 }
 
 .runLeft {
-  background-position: -536px -570px;
-  width: 360px;
-  height: 365px;
+  background-image: url(img/ItzelRun.png);
+  background-position: -510px -609px;
+  width: 329px;
+  height: 313px;
 }
 
 .defeat {
