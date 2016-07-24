@@ -24,7 +24,7 @@ setTimeout(function(){
 setInterval(moveHero, 20);
 setInterval(attack, 100);
 setInterval(collision, 20);
-setInterval(death, 100);
+// setInterval(death, 100);
 var keys = {}
 
 
@@ -90,35 +90,35 @@ function collision() {
     // determining positions of hero and mud
   var currentMud = $('.mud')
   if (currentMud.length){
-  var heroPos = hero.offset().left + 469; //checks for width + width of hero class
-  var mudPos = currentMud.offset().left;
 
-  if (mudPos - heroPos < 0 && $('div').hasClass('attack') ){
-    console.log('hit');
-    currentMud.addClass('mudDeath');
+    var heroPos = hero.offset().left; //checks for width + width of hero class
+    var mudPos = currentMud.offset().left;
 
-    setTimeout(function(){ //removes mud after death
-      currentMud.remove();
-    }, 100);
+    if (mudPos - (heroPos + 469) < 0 && $('div').hasClass('attack') ){ //adds width of that particular image
+      console.log('hit');
+      currentMud.addClass('mudDeath');
 
-    currentMud = $('.mud'); // this keeps checking for all mudes
+      setTimeout(function(){ //removes mud after death
+        currentMud.remove();
+      }, 100);
+
+      currentMud = $('.mud'); // this keeps checking for all mudes
+    }
+    else if (mudPos - (heroPos + 219) < 0 && mudPos ) { //adds width of that particular image
+      hero.remove();
+      console.log("GAME OVER");
+    }
   }
 }
-}
 
-//collision detection / hero dies if enemy touches them
-function death(){
-  var currentMud = $('.mud')
-  if (currentMud.length){
-  var heroPos = hero.offset().left + 219; //checks for width + width of hero class
-  var mudPos = currentMud.offset().left;
 
-  if (mudPos - heroPos < 0 && mudPos ){
-  hero.remove();
-  console.log("GAME OVER");
-}
-}
-}
+
+
+
+
+
+
+
 
 // creating enemy
 function makeMud(){
