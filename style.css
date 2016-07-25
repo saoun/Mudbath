@@ -91,9 +91,18 @@ body {
 .defeat {
   position: absolute;
   background-image: url(img/ItzelDeath.png);
-  background-position: -821px -565px;
+  background-position: -821px -549px;
   width: 308px;
-  height: 378px;
+  height: 393px;
+  animation: bounce 2s infinite;
+ -webkit-animation: bounce 2s infinite;
+}
+
+
+@-webkit-keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
+ 40% {-webkit-transform: translateY(-30px);}
+ 60% {-webkit-transform: translateY(-15px);}
 }
 
 

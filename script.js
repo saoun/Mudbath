@@ -174,7 +174,7 @@ function collision() {
 var counterLeft = 7000;
 var moveMudLeft = function(){
   makeMudLeft()
-  $('.mudLeft').animate({right: "-150"}, 6000); // how fast is move across the screen
+  $('.mudLeft').animate({right: "-150"}, 3000); // how fast is move across the screen
 
   if (counterLeft>100){
     counterLeft=counterLeft-50; // how fast enemies appear
@@ -210,7 +210,7 @@ function collisionLeft() {
       currentMud = $('.mudLeft'); // this keeps checking for all mudes
     }
     //hero defeat
-    else if (mudPos - heroPos > 0 && mudPos ) { //adds width of that particular image
+    else if (mudPos - heroPos > -200 && mudPos ) { //adds width of that particular image
 
       console.log("GAME OVER");
       hero.addClass('defeat');

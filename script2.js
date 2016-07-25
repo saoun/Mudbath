@@ -2,40 +2,21 @@
 (function(){
   console.log('loaded')
 
-var mudLeft = $('<div class="mudDeathLeft">')
-  $('body').append(mudLeft);
 
+var hero = $('<div class="hero">');
+$('body').append(hero);
 
+setInterval(moveHero, 20)
 
-// var hero = $('<div class="hero">');
-// $('body').append(hero);
-
-// setInterval(moveHero, 20);
-// // var TimerWalk;
-// // var currentKey;
-// // var charStep = 2
-// // var charSpeed = 400
-// var keys = {}
-
-// $(document).keydown(function(e) {
-//     keys[e.keyCode] = true;
-// });
-
-// $(document).keyup(function(e) {
-//     delete keys[e.keyCode];
-// });
-
-
-// $(function() {
-
+// function moveHero() {
 //     var arrowKeyDown = false;
 //     $('body').keydown(function(e) {
-//         if (e.which == 39 && !arrowKeyDown)  {
-//             arrowKeyDown = true;
 
-//             hero.animate({left: "+=10"}, 0);
+//         if (e.which == 39 && !arrowKeyDown) {
+//             arrowKeyDown = true;
 //             hero.addClass('run');
-//             console.log('right');
+//             hero.animate({left: "+=1"}, 0);
+//             console.log('down');
 //         }
 //     });
 
@@ -43,83 +24,54 @@ var mudLeft = $('<div class="mudDeathLeft">')
 //         if (e.which == 39) {
 //             arrowKeyDown = false;
 
-
-//             hero.removeClass('run');
-//             console.log('idle');
+//             hero.removeClass('run')
+//             console.log('up');
 //         }
 //     });
-// });
+// };
+$(document).keydown(function(e) {
+    keys[e.keyCode] = true;
+});
+
+$(document).keyup(function(e) {
+    delete keys[e.keyCode];
+});
+
+var keys = {}
 
 
-// function moveHero() {
-//     for (var direction in keys) {
-//         if (!keys.hasOwnProperty(direction)) continue ;
+function moveHero() {
+    for (var direction in keys) {
+        if (!keys.hasOwnProperty(direction)) continue;
+        //move left
+        if (direction == 37 && hero.position().left > -150) {
+            hero.addClass('left');
+            hero.addClass('runLeft');
+            hero.animate({left: "-=10"}, 0);
 
-//           var arrowKeyDown = false;
-//               $('body').keydown(function(e) {
-//                 //move right
-//                   if (e.which == 39 && !arrowKeyDown && hero.position().left < $(window).width())  {
-//                       arrowKeyDown = true;
+            setTimeout (function(){
+                hero.removeClass('runLeft');
+            }, 2000)
+              }
 
-//                       hero.animate({left: "+=1"}, 0);
-//                       hero.addClass('run');
-//                       console.log('right');
-//                   } return false
-//                 //move left
-//                   if (e.which == 37 && !arrowKeyDown && hero.position().left > -150)  {
-//                       arrowKeyDown = true;
+        //move right
+        if (direction == 39 && hero.position().left < $(window).width()) {
+            hero.removeClass('left');
+            hero.removeClass('runLeft')
+            hero.addClass('run')
+            hero.animate({left: "+=10"}, 0);
 
-//                       hero.addClass('runLeft');
-//                       hero.animate({left: "-=1"}, 0);
-//                       console.log('right');
-//                   } return false
-//               });
+            setTimeout (function(){
+                hero.removeClass('run');
+            }, 2000)
+        }
 
-//               $('body').keyup(function(e) {
-//                 //idle on right
-//                   if (e.which == 39) {
-//                       arrowKeyDown = false;
-
-//                       hero.removeClass('run');
-//                       console.log('idle');
-//                   }
-//                 //idle on left
-//                   if (e.which == 39) {
-//                       arrowKeyDown = false;
-
-//                       hero.removeClass('runLeft');
-//                       hero.addClass('left')
-
-//                       console.log('idle');
-//                   }
-//               });
-
-
-
-        // if (direction == 37 && !keyPressed) {
-
-        //     hero.addClass('runLeft');
-        //     hero.animate({left: "-=10"}, 0);
-        // }
-
-        // if (direction == 38 ) {
-        //     hero.animate({top: "-=10"}, 0);
-        // }
-
-        // if (direction == 39 ) {
-        //     hero.removeClass('left');
-        //     hero.removeClass('runLeft')
-        //     hero.addClass('run');
-        //     hero.animate({left: "+=10"}, 0);
-        // }
-
-        // if (direction == 40 ) {
-        //     hero.animate({top: "+=10"}, 0);
-//         // }
-//     }
-// }
-
-
+        //jumping ?? to revisit
+        if (direction == 38 && hero.position().top > $(window).height()) {
+            hero.animate({top: "+10", bottom: "+10"}, 0);
+        }
+    }
+}
 
 
 
