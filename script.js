@@ -6,6 +6,11 @@
 var hero = $('<div class="hero">');
 $('body').append(hero);
 
+//intervals for game check of functions
+setInterval(moveHero, 20);
+setInterval(attack, 100);
+var collision = setInterval(collision, 20);
+var keys = {}
 
 //instructions at beginning of game
 var instructions = $('<div class="instructions">');
@@ -25,16 +30,22 @@ setTimeout(function(){
 }, 3500)
 
 
-//intervals for game check of functions
-setInterval(moveHero, 20);
-setInterval(attack, 100);
-var collision = setInterval(collision, 20);
-var keys = {}
+//adding timer after instructions disappear
+// setTimeout(function(){
+//   $('<div class="timer">').appendTo($('body'));
+//   var count=0;
+//   var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+//   function timer(){
+//     count+=1;
+//    $(".timer").html(count + " secs") // watch for spelling
+//   }
+// }, 3550);
 
 
 //moving hero
-//setting limits for up / down / left / right to be contained in background
-// http://stackoverflow.com/questions/7298507/move-element-with-keypress-multiple
+//setting limits for up / left / right to be contained in background
+//got key functions from: http://stackoverflow.com/questions/7298507/move-element-with-keypress-multiple
 $(document).keydown(function(e) {
     keys[e.keyCode] = true;
 });
@@ -154,25 +165,57 @@ function collision() {
 
       console.log("GAME OVER");
       hero.addClass('defeat');
-      // currentMud.stop(); //to stop animation
+      currentMud.stop(); //to stop animation
 
-      setTimeout(function(){
-        hero.remove();
-      }, 4000);
+      // setTimeout(function(){
+      //   hero.remove();
+      // }, 4000);
 
       clearInterval(collision)
       clearInterval(movingMud)
-
-
-      // setTimeout(function(){
-      //   mud.remove();
-      //   makeMud();
-      //   moveMud();
-      // }, 1000)
-
+      gameOver()
     }
   }
 }
+
+//end game message
+function gameOver(){
+  //display game over
+  var gameOver = $('<div class="gameOver">');
+  $('body').append(gameOver);
+  gameOver.text("Game Over")
+
+}
+
+//set Timer and cancel Timer
+setTimeout (function(){
+  var clock = $('<div class="timer">')
+  clock.appendTo($('body'));
+  var count=0;
+  var counter=setInterval(timer, 1000); //will run it every 1 second
+
+  function timer(){
+    count+=1;
+    clock.text(count + " secs")
+
+    //clear timer if game over
+    if (hero.hasClass('defeat')){
+      clearInterval(counter); //stop timer
+      clock.remove(); //remove timer
+
+      var topTime = $('<div class="topTime">');
+      $('body').append(topTime);
+      topTime.text("You survived " + count + " secs"); //add timer score
+    }
+  }
+}, 3500);
+
+
+
+
+
+
+
 
 
 

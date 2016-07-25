@@ -3,13 +3,23 @@
   console.log('loaded')
 
 
-var start = new Date;
 
-setInterval(function() {
-    var timer = $('<div class="timer">')
-    $('body').append(timer)
-    $('.Timer').text((new Date - start) / 1000 + " Seconds");
-}, 1000);
+// var start = new Date;
+
+// setInterval(function() {
+//     $('.Timer').text((new Date - start) / 1000 + " Seconds");
+// }, 1000);
+
+setTimeout(function(){
+$('<div class="timer">').appendTo($('body'));
+var count=0;
+var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+function timer(){
+  count+=1;
+ $(".timer").html(count + " secs") // watch for spelling
+}
+}, 5000)
 
 
 
