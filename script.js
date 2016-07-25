@@ -113,15 +113,14 @@ function makeMudLeft(){
 
 //needed to change the interval of setinterval thats running, got this code from:
 // http://stackoverflow.com/questions/1280263/changing-the-interval-of-setinterval-while-its-running
-
-//movign mud from right
+//moving mud from RIGHT
 var counter = 5000;
 var moveMud = function(){
   makeMud()
   $('.mud').animate({left: "-150"}, 4000); //1000 is how fast is move across the screen
 
   if (counter>100){
-    counter=counter-10; // how fast enemies appear
+    counter=counter-50; // how fast enemies appear
   };
 
   if ($('.mud').position().left < 0){
@@ -131,6 +130,7 @@ var moveMud = function(){
   // interval = setInterval(moveMud, counter);
 }
 var movingMud = setInterval(moveMud, counter);
+
 
 // RIGHT collision detection / enemy dies if hero attacks
 function collision() {
@@ -165,18 +165,19 @@ function collision() {
       clearInterval(movingMudLeft);
       gameOver();
     }
-    }
+  }
 }
 
+//stuck with verbosity. didn't manage to combine movement and collision for right and left in one function instead of 2
 //
-//moving mud from left
+//moving mud from LEFT
 var counterLeft = 7000;
 var moveMudLeft = function(){
   makeMudLeft()
   $('.mudLeft').animate({right: "-150"}, 6000); // how fast is move across the screen
 
   if (counterLeft>100){
-    counterLeft=counterLeft-10; // how fast enemies appear
+    counterLeft=counterLeft-50; // how fast enemies appear
   };
 
   if ($('.mudLeft').position().left > 1000){
@@ -184,6 +185,7 @@ var moveMudLeft = function(){
   };
 }
 var movingMudLeft = setInterval(moveMudLeft, counterLeft);
+
 
 //
 //LEFT collision detection / enemy dies if hero attacks
@@ -222,13 +224,13 @@ function collisionLeft() {
   }
 }
 
+
 //end game message
 function gameOver(){
   //display game over
   var gameOver = $('<div class="gameOver">');
   $('body').append(gameOver);
-  gameOver.text("Game Over")
-
+  gameOver.text("Game Over");
 }
 
 //set Timer and cancel Timer
@@ -240,7 +242,7 @@ setTimeout (function(){
 
   function timer(){
     count+=1;
-    clock.text(count + " secs")
+    clock.text(count + " secs");
 
     //clear timer if game over
     if (hero.hasClass('defeat')){
