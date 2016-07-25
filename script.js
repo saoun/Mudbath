@@ -28,7 +28,7 @@ setTimeout(function(){
 //intervals for game check of functions
 setInterval(moveHero, 20);
 setInterval(attack, 100);
-setInterval(collision, 20);
+var collision = setInterval(collision, 20);
 var keys = {}
 
 
@@ -112,15 +112,18 @@ var moveMud = function(){
   makeMud()
   $('.mud').animate({left: "-150"}, 4000); //1000 is how fast is move across the screen
 
-
   if (counter>100){
     counter=counter-10; // how fast enemies appear
   }
 
-  clearInterval(interval);
-  interval = setInterval(moveMud, counter);
+  if ($('.mud').position().left < 0){
+    $('.mud').remove();
+  }
+
+  // clearInterval(interval);
+  // interval = setInterval(moveMud, counter);
 }
-var interval = setInterval(moveMud, counter);
+var movingMud = setInterval(moveMud, counter);
 
 
 
@@ -155,7 +158,11 @@ function collision() {
 
       setTimeout(function(){
         hero.remove();
-      }, 3000);
+      }, 4000);
+
+      clearInterval(collision)
+      clearInterval(movingMud)
+
 
       // setTimeout(function(){
       //   mud.remove();
