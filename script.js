@@ -30,19 +30,6 @@ setTimeout(function(){
 }, 3500)
 
 
-//adding timer after instructions disappear
-// setTimeout(function(){
-//   $('<div class="timer">').appendTo($('body'));
-//   var count=0;
-//   var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
-
-//   function timer(){
-//     count+=1;
-//    $(".timer").html(count + " secs") // watch for spelling
-//   }
-// }, 3550);
-
-
 //moving hero
 //setting limits for up / left / right to be contained in background
 //got key functions from: http://stackoverflow.com/questions/7298507/move-element-with-keypress-multiple
@@ -71,6 +58,7 @@ function moveHero() {
             hero.addClass('run')
             hero.animate({left: "+=10"}, 0);
         }
+
         //jumping
         if (direction == 38 && hero.position().top > $(window).height()) {
             hero.animate({top: "+10", bottom: "+10"}, 0);
@@ -113,28 +101,45 @@ function attack(){
 function makeMud(){
   var mud = $('<div class="mud">')
   $('body').append(mud);
+  var mudLeft = $('<div class="mudLeft">')
+  $('body').append(mudLeft);
 };
 
 //needed to change the interval of setinterval thats running, got this code from:
 // http://stackoverflow.com/questions/1280263/changing-the-interval-of-setinterval-while-its-running
 var counter = 5000;
-
+//movign mud from right
 var moveMud = function(){
   makeMud()
   $('.mud').animate({left: "-150"}, 4000); //1000 is how fast is move across the screen
 
   if (counter>100){
     counter=counter-10; // how fast enemies appear
-  }
+  };
 
   if ($('.mud').position().left < 0){
     $('.mud').remove();
-  }
-
+  };
   // clearInterval(interval);
   // interval = setInterval(moveMud, counter);
 }
 var movingMud = setInterval(moveMud, counter);
+
+var counter = 3000;
+//moving mud from left
+var moveMudLeft = function(){
+  makeMud()
+  $('.mudLeft').animate({right: "-150"}, 4000); //1000 is how fast is move across the screen
+
+  if (counter>100){
+    counter=counter-10; // how fast enemies appear
+  };
+
+  if ($('.mudLeft').position().left > 170){
+    $('.mudLeft').remove();
+  };
+}
+var movingMudLeft = setInterval(moveMudLeft, counter);
 
 
 
@@ -173,6 +178,7 @@ function collision() {
 
       clearInterval(collision)
       clearInterval(movingMud)
+      clearInterval(movingMudLeft)
       gameOver()
     }
   }
@@ -209,18 +215,6 @@ setTimeout (function(){
     }
   }
 }, 3500);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 })();

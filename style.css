@@ -94,9 +94,7 @@ body {
   background-position: -821px -565px;
   width: 308px;
   height: 378px;
-/*   background-image: ////;
- */}
-
+}
 
 
 .mud {
@@ -112,6 +110,23 @@ body {
 .mudDeath {
   background-image: url(img/Mudman.png);
   background-position: -1477px -532px;
+  width: 305px;
+  height: 423px;
+}
+
+.mudLeft {
+  position: absolute;
+  background-image: url(img/MudmanLeft.png);
+  background-position: 835px -841px;
+  width: 320px;
+  height: 344px;
+  bottom: 0%;
+  right: 100%;
+}
+
+.mudDeathLeft {
+  background-image: url(img/Mudman.png);
+  background-position: 477px -532px;
   width: 305px;
   height: 423px;
 }
