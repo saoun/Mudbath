@@ -2,33 +2,8 @@
 (function(){
   console.log('loaded')
 
-// creating enemy
-function makeMud(){
-  var mudLeft = $('<div class="mudLeft">')
+var mudLeft = $('<div class="mudDeathLeft">')
   $('body').append(mudLeft);
-
-};
-
-//needed to change the interval of setinterval thats running, got this code from:
-// http://stackoverflow.com/questions/1280263/changing-the-interval-of-setinterval-while-its-running
-var counter = 4000;
-
-//movign mudLeft from right
-var moveMud = function(){
-  makeMud()
-  $('.mudLeft').animate({right: "-150"}, 4000); //1000 is how fast is move across the screen
-
-  if (counter>100){
-    counter=counter-10; // how fast enemies appear
-  };
-
-  if ($('.mudLeft').position().left > 170){
-    $('.mudLeft').remove();
-  };
-  // clearInterval(interval);
-  // interval = setInterval(moveMud, counter);
-}
-var movingMud = setInterval(moveMud, counter);
 
 
 

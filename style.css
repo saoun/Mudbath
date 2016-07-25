@@ -125,10 +125,12 @@ body {
 }
 
 .mudDeathLeft {
-  background-image: url(img/Mudman.png);
-  background-position: 477px -532px;
+    position: absolute;
+  background-image: url(img/MudmanLeft.png);
+  background-position: 385px -800px;
   width: 305px;
-  height: 423px;
+  height: 387px;
+  /* bottom: 0%; */
 }
 
 

@@ -2,7 +2,7 @@
 (function(){
   console.log('working');
 
-//global variables
+//global variable
 var hero = $('<div class="hero">');
 $('body').append(hero);
 
@@ -10,7 +10,9 @@ $('body').append(hero);
 setInterval(moveHero, 20);
 setInterval(attack, 100);
 var collision = setInterval(collision, 20);
+var collisionLeft = setInterval(collisionLeft, 20);
 var keys = {}
+
 
 //instructions at beginning of game
 var instructions = $('<div class="instructions">');
@@ -59,7 +61,7 @@ function moveHero() {
             hero.animate({left: "+=10"}, 0);
         }
 
-        //jumping
+        //jumping ?? to revisit
         if (direction == 38 && hero.position().top > $(window).height()) {
             hero.animate({top: "+10", bottom: "+10"}, 0);
         }
@@ -97,18 +99,23 @@ function attack(){
 }
 
 
-// creating enemy
+// creating enemy right + left
 function makeMud(){
   var mud = $('<div class="mud">')
   $('body').append(mud);
+};
+
+function makeMudLeft(){
   var mudLeft = $('<div class="mudLeft">')
   $('body').append(mudLeft);
-};
+}
+
 
 //needed to change the interval of setinterval thats running, got this code from:
 // http://stackoverflow.com/questions/1280263/changing-the-interval-of-setinterval-while-its-running
-var counter = 5000;
+
 //movign mud from right
+var counter = 5000;
 var moveMud = function(){
   makeMud()
   $('.mud').animate({left: "-150"}, 4000); //1000 is how fast is move across the screen
@@ -125,31 +132,11 @@ var moveMud = function(){
 }
 var movingMud = setInterval(moveMud, counter);
 
-var counter = 3000;
-//moving mud from left
-var moveMudLeft = function(){
-  makeMud()
-  $('.mudLeft').animate({right: "-150"}, 4000); //1000 is how fast is move across the screen
-
-  if (counter>100){
-    counter=counter-10; // how fast enemies appear
-  };
-
-  if ($('.mudLeft').position().left > 170){
-    $('.mudLeft').remove();
-  };
-}
-var movingMudLeft = setInterval(moveMudLeft, counter);
-
-
-
-//collision detection / enemy dies if hero attacks
+// RIGHT collision detection / enemy dies if hero attacks
 function collision() {
     // determining positions of hero and mud
-  var currentMud = $('.mud')
-  // for (var i = 0; i< currentMud.length; i++){ // alternative way of writing
+  var currentMud = $('.mud');
   if (currentMud.length){
-
     var heroPos = hero.offset().left; //checks for width + width of hero class
     var mudPos = currentMud.offset().left;
 
@@ -165,21 +152,72 @@ function collision() {
 
       currentMud = $('.mud'); // this keeps checking for all mudes
     }
+
     //hero defeat
     else if (mudPos - (heroPos + 219) < 0 && mudPos ) { //adds width of that particular image
 
       console.log("GAME OVER");
       hero.addClass('defeat');
       currentMud.stop(); //to stop animation
+      clearInterval(collision);
+      clearInterval(collisionLeft)
+      clearInterval(movingMud);
+      clearInterval(movingMudLeft);
+      gameOver();
+    }
+    }
+}
 
-      // setTimeout(function(){
-      //   hero.remove();
-      // }, 4000);
+//
+//moving mud from left
+var counterLeft = 7000;
+var moveMudLeft = function(){
+  makeMudLeft()
+  $('.mudLeft').animate({right: "-150"}, 6000); // how fast is move across the screen
 
-      clearInterval(collision)
-      clearInterval(movingMud)
-      clearInterval(movingMudLeft)
-      gameOver()
+  if (counterLeft>100){
+    counterLeft=counterLeft-10; // how fast enemies appear
+  };
+
+  if ($('.mudLeft').position().left > 1000){
+    $('.mudLeft').remove();
+  };
+}
+var movingMudLeft = setInterval(moveMudLeft, counterLeft);
+
+//
+//LEFT collision detection / enemy dies if hero attacks
+function collisionLeft() {
+    // determining positions of hero and mud
+  var currentMud = $('.mudLeft')
+  if (currentMud.length){
+
+    var heroPos = hero.offset().left; //checks for width + width of hero class
+    var mudPos = currentMud.offset().left;
+
+    //hero win
+    if (mudPos - heroPos < 0 && $('div').hasClass('attackleft') ){ //adds width of that particular image
+
+      console.log('hit');
+      currentMud.addClass('mudDeathLeft');
+
+      setTimeout(function(){ //removes mud after death
+        currentMud.remove();
+      }, 100);
+
+      currentMud = $('.mudLeft'); // this keeps checking for all mudes
+    }
+    //hero defeat
+    else if (mudPos - heroPos > 0 && mudPos ) { //adds width of that particular image
+
+      console.log("GAME OVER");
+      hero.addClass('defeat');
+      currentMud.stop(); //to stop animation
+      clearInterval(collisionLeft);
+      clearInterval(collision);
+      clearInterval(movingMud);
+      clearInterval(movingMudLeft);
+      gameOver();
     }
   }
 }
