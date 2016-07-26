@@ -117,10 +117,10 @@ function makeMudLeft(){
 var counter = 5000;
 var moveMud = function(){
   makeMud()
-  $('.mud').animate({left: "-150"}, 4000); //1000 is how fast is move across the screen
+  $('.mud').animate({left: "-150"}, 4000); //4000 is how fast is move across the screen
 
-  if (counter>100){
-    counter=counter-50; // how fast enemies appear
+  if (counter> -5000){
+    counter=counter-100; // how fast enemies appear
   };
 
   if ($('.mud').position().left < 0){
@@ -176,8 +176,8 @@ var moveMudLeft = function(){
   makeMudLeft()
   $('.mudLeft').animate({right: "-150"}, 3000); // how fast is move across the screen
 
-  if (counterLeft>100){
-    counterLeft=counterLeft-50; // how fast enemies appear
+  if (counterLeft> -5000){
+    counterLeft=counterLeft-100; // how fast enemies appear
   };
 
   if ($('.mudLeft').position().left > 1000){
